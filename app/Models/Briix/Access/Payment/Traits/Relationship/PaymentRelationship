@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models\Briix\Access\Payment\Traits\Relationship;
+
+/**
+ * Class PaymentRelationship
+ * @package App\Models\Briix\Access\Payment\Traits\Relationship
+ */
+trait PaymentRelationship
+{
+    /**
+     * @return mixed
+     */
+    /**
+    public function roles()
+    {
+        return $this->belongsToMany(config('access.role'), config('access.Payment
+      _role_table'), 'Payment
+      _id', 'role_id');
+    }**/
+}

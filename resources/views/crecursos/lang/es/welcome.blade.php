@@ -1,0 +1,1 @@
+<p>Panel para la adminstracion de Recursos Humanos.</p>
