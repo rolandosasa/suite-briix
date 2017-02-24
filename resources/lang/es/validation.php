@@ -313,6 +313,14 @@ return [
                     'phone2'=> 'Celular',
                     'sort' => 'Orden',
                 ],
+
+                'lines' => [
+                    'associated_permissions' => 'Permisos asociados',
+                    'name' => 'Nombre',
+                    'user_id'=>'Usuario Asociado',
+                    'phone' => 'Telefono',
+                    'sort' => 'Orden',
+                ],
             ],
         ],
 
