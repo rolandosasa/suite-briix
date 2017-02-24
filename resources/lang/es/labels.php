@@ -390,11 +390,9 @@ return [
                 'deleted' => 'Lineas Eliminadas',
 
                 'table' => [
-                    'contact' => 'Contacto',
-                    'email' => 'Email de la Empresa',
-                    'enterprise' => 'Linea',
+                    'name' => 'Linea',
                     'phone' => 'Telefono',
-                    'rfc' => 'RFC de la Empresa',
+                    'user' => 'Usuario',
                     'confirmed' => 'Confirmado',
                     'created' => 'Creado',
                     'id' => 'ID',

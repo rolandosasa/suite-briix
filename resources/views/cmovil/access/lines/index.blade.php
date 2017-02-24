@@ -25,11 +25,9 @@
                 <table id="roles-table" class="table table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th>{{ trans('labels.cmovil.access.lines.table.enterprise') }}</th>
-                            <th>{{ trans('labels.cmovil.access.lines.table.contact') }}</th>
-                            <th>{{ trans('labels.cmovil.access.lines.table.email') }}</th>
-                            <th>{{ trans('labels.cmovil.access.lines.table.rfc') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.name') }}</th>
                             <th>{{ trans('labels.cmovil.access.lines.table.phone') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.user') }}</th>
                             <th>{{ trans('labels.general.actions') }}</th>
                         </tr>
                     </thead>
@@ -46,7 +44,7 @@
             </div><!-- /.box tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-            {!! history()->renderType('Enterprise') !!}
+            {!! history()->renderType('Line') !!}
         </div><!-- /.box-body -->
     </div><!--box box-success-->
 @stop
@@ -62,11 +60,9 @@
                 serverSide: true,
                 ajax: '{{ route("cmovil.access.line.get") }}',
                 columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'contact', name: 'contact'},
-                    {data: 'email', name: 'email'},
-                    {data: 'rfc', name: 'rfc'},
+                    {data: 'name', name: 'name'},                    
                     {data: 'phone', name: 'phone'},
+                    {data: 'user_id', name: 'user_id'},
                     {data: 'actions', name: 'actions'}
                 ],
                 order: [[3, "asc"]],

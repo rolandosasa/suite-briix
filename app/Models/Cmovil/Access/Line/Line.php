@@ -5,8 +5,8 @@ namespace App\Models\Cmovil\Access\Line;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Cmovil\Access\Line\Traits\LineAccess;
-use App\Models\Cmovil\Access\Line\Traits\Attribute\EnterpriseAttribute;
-use App\Models\Cmovil\Access\Line\Traits\Relationship\EnterpriseRelationship;
+use App\Models\Cmovil\Access\Line\Traits\Attribute\LineAttribute;
+use App\Models\Cmovil\Access\Line\Traits\Relationship\LineRelationship;
 
 /**
  * Class Enterprise

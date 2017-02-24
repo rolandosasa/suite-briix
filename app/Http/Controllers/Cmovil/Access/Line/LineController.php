@@ -11,7 +11,7 @@ use Yajra\Datatables\Facades\Datatables;
 use App\Http\Requests\Cmovil\Access\Line\StoreLineRequest;
 use App\Http\Requests\Cmovil\Access\Line\ManageLineRequest;
 use App\Http\Requests\Cmovil\Access\Line\UpdateLineRequest;
-use App\Repositories\Cmovil\Access\Enterprise\EnterpriseRepositoryContract;
+use App\Repositories\Cmovil\Access\Line\LineRepositoryContract;
 use App\Repositories\Cmovil\Access\Permission\PermissionRepositoryContract;
 
 /**
@@ -23,7 +23,7 @@ class LineController extends Controller
     /**
      * @var EnterpriseRepositoryContract
      */
-    protected $enterprises;
+    protected $lines;
 
     /**
      * @var PermissionRepositoryContract
@@ -34,9 +34,9 @@ class LineController extends Controller
      * @param EnterpriseRepositoryContract $enterprises
      * @param PermissionRepositoryContract $permissions
      */
-    public function __construct(EnterpriseRepositoryContract $enterprises, PermissionRepositoryContract $permissions)
+    public function __construct(LineRepositoryContract $lines, PermissionRepositoryContract $permissions)
 	{
-        $this->enterprises = $enterprises;
+        $this->lines = $lines;
         $this->permissions = $permissions;
     }
 
@@ -55,9 +55,9 @@ class LineController extends Controller
 	 */
 	public function get(ManageLineRequest $request)
 	{
-		return Datatables::of($this->enterprises->getForDataTable($request->get('trashed')))
-        ->addColumn('actions', function($enterprise) {
-                return $enterprise->action_buttons;
+		return Datatables::of($this->lines->getForDataTable($request->get('trashed')))
+        ->addColumn('actions', function($line) {
+                return $line->action_buttons;
             })
 			->make(true);
 	}
@@ -70,7 +70,7 @@ class LineController extends Controller
     {
         return view('cmovil.access.lines.create')
             ->withPermissions($this->permissions->getAllPermissions())
-			->withEnterpriseCount($this->enterprises->getCount());
+			->withLineCount($this->lines->getCount());
     }
 
     /**
@@ -79,8 +79,8 @@ class LineController extends Controller
      */
     public function store(StoreLineRequest $request)
     {
-        dd($request);
-        $this->enterprises->create($request->all());
+        //dd($request);
+        $this->lines->create($request->all());
         return redirect()->route('cmovil.access.line.index')->withFlashSuccess(trans('alerts.Cmovil.lines.created'));
     }
 
@@ -89,10 +89,10 @@ class LineController extends Controller
      * @param  ManageEnterpriseRequest $request
      * @return mixed
      */
-    public function edit(Line $enterprise, ManageLineRequest $request)
+    public function edit(Line $line, ManageLineRequest $request)
     {
         return view('cmovil.access.lines.edit')
-            ->withEnterprise($enterprise);
+            ->withLine($line);
     }
 
 
@@ -101,9 +101,9 @@ class LineController extends Controller
      * @param  UpdateEnterpriseRequest $request
      * @return mixed
      */
-    public function update(Line $enterprise, UpdateLineRequest $request)
+    public function update(Line $line, UpdateLineRequest $request)
     {
-        $this->enterprises->update($enterprise, $request->all());
+        $this->lines->update($line, $request->all());
         return redirect()->route('cmovil.access.line.index')->withFlashSuccess(trans('alerts.Cmovil.lines.updated'));
     }
 
@@ -112,9 +112,9 @@ class LineController extends Controller
      * @param  ManageEnterpriseRequest $request
      * @return mixed
      */
-    public function destroy(Line $enterprise, ManageLineRequest $request)
+    public function destroy(Line $line, ManageLineRequest $request)
     {
-        $this->enterprises->destroy($enterprise);
+        $this->lines->destroy($line);
         return redirect()->back()->withFlashSuccess(trans('alerts.cmovil.lines.deleted'));
         
     }
@@ -124,9 +124,9 @@ class LineController extends Controller
      * @param ManageEnterpriseRequest $request
      * @return mixed
      */
-    public function delete(Line $deletedEnterprise, ManageLineRequest $request)
+    public function delete(Line $deletedLine, ManageLineRequest $request)
     {
-        $this->enterprises->delete($deletedEnterprise);
+        $this->lines->delete($deletedLine);
         return redirect()->back()->withFlashSuccess(trans('alerts.cmovil.lines.deleted_permanently'));
     }
 
@@ -135,9 +135,9 @@ class LineController extends Controller
      * @param ManageEnterpriseRequest $request
      * @return mixed
      */
-    public function restore(Line $deletedEnterprise, ManageLineRequest $request)
+    public function restore(Line $deletedLine, ManageLineRequest $request)
     {
-        $this->enterprises->restore($deletedEnterprise);
+        $this->lines->restore($deletedLine);
         return redirect()->back()->withFlashSuccess(trans('alerts.cmovil.lines.restored'));
     }
     
@@ -145,7 +145,7 @@ class LineController extends Controller
      * @param ManageEnterpriseRequest $request
      * @return mixed
      */
-    public function deleted(ManageLinesRequest $request)
+    public function deleted(ManageLineRequest $request)
     {
         return view('cmovil.access.lines.deleted');
     }

@@ -231,6 +231,12 @@ class AccessServiceProvider extends ServiceProvider
             \App\Repositories\Cmovil\Access\User\EloquentUserRepository::class
         );
 
+
+        $this->app->bind(
+            \App\Repositories\Cmovil\Access\Line\LineRepositoryContract::class,
+            \App\Repositories\Cmovil\Access\Line\EloquentLineRepository::class
+        );
+
     }
 
     /**
