@@ -1,6 +1,6 @@
 @extends ('cmovil.layouts.master')
 
-@section ('title', trans('labels.cmovil.access.enterprises.management') . ' | ' . trans('labels.cmovil.access.enterprises.deleted'))
+@section ('title', trans('labels.cmovil.access.lines.management') . ' | ' . trans('labels.cmovil.access.lines.deleted'))
 
 @section('after-styles-end')
     {{ Html::style("css/backend/plugin/datatables/dataTables.bootstrap.min.css") }}
@@ -8,33 +8,31 @@
 
 @section('page-header')
     <h1>
-        {{ trans('labels.cmovil.access.enterprises.management') }}
-        <small>{{ trans('labels.cmovil.access.enterprises.deleted') }}</small>
+        {{ trans('labels.cmovil.access.lines.management') }}
+        <small>{{ trans('labels.cmovil.access.lines.deleted') }}</small>
     </h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('labels.cmovil.access.enterprises.deleted') }}</h3>
+            <h3 class="box-title">{{ trans('labels.cmovil.access.lines.deleted') }}</h3>
 
             <div class="box-tools pull-right">
-                @include('cmovil.access.includes.partials.header-buttons-enterprises')
+                @include('cmovil.access.includes.partials.header-buttons-lines')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 
         <div class="box-body">
             <div class="table-responsive">
-                <table id="enterprises-table" class="table table-condensed table-hover">
+                <table id="lines-table" class="table table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.enterprise') }}</th>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.contact') }}</th>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.email') }}</th>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.rfc') }}</th>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.phone') }}</th>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.created') }}</th>
-                            <th>{{ trans('labels.cmovil.access.enterprises.table.last_updated') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.name') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.phone') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.user') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.created') }}</th>
+                            <th>{{ trans('labels.cmovil.access.lines.table.last_updated') }}</th>
                             <th>{{ trans('labels.general.actions') }}</th>
                         </tr>
                     </thead>
@@ -50,20 +48,18 @@
 
 	<script>
         $(function() {
-            $('#enterprises-table').DataTable({
+            $('#lines-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("cmovil.access.enterprise.get") }}',
+                    url: '{{ route("cmovil.access.line.get") }}',
                     type: 'get',
                     data: {trashed: true}
                 },
                 columns: [
-                    {data: 'rfc', name: 'rfc'},
                     {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'contact', name: 'contact'},
                     {data: 'phone', name: 'phone'},
+                    {data: 'user_id', name: 'user_id'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
@@ -72,13 +68,13 @@
                 searchDelay: 500
             });
 
-            $("body").on("click", "a[name='delete_enterprise_perm']", function(e) {
+            $("body").on("click", "a[name='delete_line_perm']", function(e) {
                 e.preventDefault();
                 var linkURL = $(this).attr("href");
 
                 swal({
                     title: "{{ trans('strings.cmovil.general.are_you_sure') }}",
-                    text: "{{ trans('strings.cmovil.access.enterprises.delete_enterprise_confirm') }}",
+                    text: "{{ trans('strings.cmovil.access.lines.delete_line_confirm') }}",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -92,13 +88,13 @@
                 });
             });
 
-            $("body").on("click", "a[name='restore_enterprise']", function(e) {
+            $("body").on("click", "a[name='restore_line']", function(e) {
                 e.preventDefault();
                 var linkURL = $(this).attr("href");
 
                 swal({
                     title: "{{ trans('strings.cmovil.general.are_you_sure') }}",
-                    text: "{{ trans('strings.cmovil.access.enterprises.restore_enterprise_confirm') }}",
+                    text: "{{ trans('strings.cmovil.access.lines.restore_line_confirm') }}",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
