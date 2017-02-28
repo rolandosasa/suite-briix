@@ -2,8 +2,9 @@
                     {{ Form::label('enterprise_id', trans('validation.attributes.cmovil.access.users.enterprise'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-4">
-                        
-                        {!!Form::select('enterprise_id', $enterprises,null ,['class' => 'form-control','required' => '','autofocus'=>'', 'placeholder' => trans('validation.attributes.cmovil.access.users.enterprise')]);!!}
+
+                     {{ Form::select('enterprise_id', [''=>trans('validation.attributes.cmovil.access.users.enterprise')] + $enterprises,null,  ['id' => 'enterprise_id','class' => 'form-control']) }}
+
                         
                     </div><!--col-lg-10-->
                 </div>
@@ -12,11 +13,11 @@
                     {{ Form::label('user_id', trans('validation.attributes.cmovil.access.lines.user_id'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-4">
-                        {{ Form::select('user_id', [''=>trans('validation.attributes.cmovil.access.lines.user_id')],null, ['class' => 'form-control']) }}
+                    {{ Form::select('user_id', [''=>trans('validation.attributes.cmovil.access.lines.user_id')]+ $users,null, ['class' => 'form-control']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
-   
+
               
                 <div class="form-group">
                     {{ Form::label('name', trans('validation.attributes.cmovil.access.lines.name'), ['class' => 'col-lg-2 control-label']) }}
@@ -55,7 +56,7 @@
    $("select[name='enterprise_id']").change(function(){
        
       var enterprise_id1 = $(this).val();
-       alert(enterprise_id1);
+       
       var token = $("input[name='_token']").val();
       //alert(token);
       $.ajax({
@@ -67,7 +68,7 @@
           data: {enterprise_id:enterprise_id1, _token:token},
 
           success: function(data) {
-           alert("Aqui voy"); 
+
             $("select[name='user_id'").html('');
 
             $("select[name='user_id'").html(data.options);

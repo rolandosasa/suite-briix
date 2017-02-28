@@ -30,7 +30,7 @@ Route::group([
 			 * Misc
 			 */
 		
-			Route::post('user/client', ['as'=>'select-user','uses'=>'UserController@selectUser']);
+			Route::post('user/cliet', ['as'=>'select-clientUser','uses'=>'UserController@UserSelect']);
 
 			Route::get('account/confirm/resend/{user}', 'UserController@resendConfirmationEmail')->name('cmovil.account.confirm.resend');
 

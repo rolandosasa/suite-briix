@@ -22,7 +22,7 @@
             </div><!-- /.box-header -->
 
             <div class="box-body">
-                @include('cmovil.access.lines.forms.lin')
+                @include('cmovil.access.lines.forms.edit-user')
             </div><!-- /.box-body -->
         </div><!--box-->
 

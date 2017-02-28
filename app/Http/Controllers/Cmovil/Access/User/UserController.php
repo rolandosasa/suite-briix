@@ -15,6 +15,7 @@ use App\Repositories\Cmovil\Access\Enterprise\EnterpriseRepositoryContract;
 use App\Http\Requests\Cmovil\Access\User\UpdateUserPasswordRequest;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract as FrontendUserRepositoryContract;
 
+
 /**
  * Class UserController
  */
@@ -94,7 +95,7 @@ class UserController extends Controller
         $enterprises = Enterprise::lists('rfc', 'id');
         return view('cmovil.access.create', compact('enterprises'))
             ->withRoles($this->roles->getAllRoles('sort', 'asc', true));
-    }¡
+    }
 
 	/**
      * @param StoreUserRequest $request
@@ -250,9 +251,9 @@ class UserController extends Controller
         return $this->users->logoutAs();
     }
 
-    public function selectUser(ManageUserRequest $request)
+    public function UserSelect(ManageUserRequest $request)
     {
-        dd($request);
+       
 
         if($request->ajax()){
 
@@ -260,7 +261,7 @@ class UserController extends Controller
            // $enterprises = Enterprise::lists('name', 'id')->where('enterprise_id', $request->enterprise_id);
 
             $data = view('cmovil.access.lines.forms.user',compact('clients'))->render();
-            dd($data);
+            //dd($data);
             return response()->json(['options'=>$data]);
 
         }

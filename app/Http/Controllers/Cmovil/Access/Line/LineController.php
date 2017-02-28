@@ -80,9 +80,9 @@ class LineController extends Controller
      */
     public function create(ManageLineRequest $request)
     {
-            //return view('cmovil.access.lines.create')
-            //->withPermissions($this->permissions->getAllPermissions())
-			//->withLineCount($this->lines->getCount());
+        //return view('cmovil.access.lines.create')
+        //->withPermissions($this->permissions->getAllPermissions())
+		//->withLineCount($this->lines->getCount());
         //$enterprises = Enterprise::list('rfc', 'id');
         $enterprises = Enterprise::pluck("name","id")->all();
         $executives = User::pluck('name', 'id')->all();
@@ -114,9 +114,19 @@ class LineController extends Controller
      * @return mixed
      */
     public function edit(Line $line, ManageLineRequest $request)
-    {
+    {   
+        $users = User::pluck("name","id")->all();
+        $enterprises = Enterprise::pluck("name","id")->all();
+        $clients = Enterprise::where('id', $line->enterprise_id)->pluck("name","id")->all();
+        $user = User::where('id', $line->user_id)->pluck("name","id")->all();
         return view('cmovil.access.lines.edit')
-            ->withLine($line);
+            ->withLine($line)
+            ->withEnterprises($enterprises)
+            ->withClients($clients)
+            ->withUser($user)
+            ->withUsers($users,'sort', 'asc', true);
+
+
     }
 
 

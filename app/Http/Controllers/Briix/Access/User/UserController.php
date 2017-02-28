@@ -86,6 +86,7 @@ class UserController extends Controller
 
     public function selectClient(ManageUserRequest $request)
     {
+       
 
         if($request->ajax()){
 

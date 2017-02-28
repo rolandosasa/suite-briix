@@ -43,6 +43,3 @@
     {{ Form::close() }}
 @stop
 
-@section('after-scripts-end')
-    {{ Html::script('js/backend/access/enterprises/script.js') }}
-@stop
