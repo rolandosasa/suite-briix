@@ -38,11 +38,11 @@ class EloquentLineRepository implements LineRepositoryContract
          */
         if ($trashed == "true") {
             return Line::onlyTrashed()
-                ->select(['id', 'name', 'user_id','phone', 'created_at', 'updated_at', 'deleted_at'])
+                ->select(['id', 'enterprise_id', 'user_id', 'name', 'phone', 'created_at', 'updated_at', 'deleted_at'])
                 ->get();
         }
 
-        return Line::select(['id', 'name', 'user_id','phone', 'created_at', 'updated_at', 'deleted_at'])
+        return Line::select(['id', 'enterprise_id', 'user_id', 'name', 'phone', 'created_at', 'updated_at', 'deleted_at'])
             ->get();
     }
 
@@ -173,10 +173,11 @@ class EloquentLineRepository implements LineRepositoryContract
      */
     private function createLineStub($input)
     {
-        $line             = new Line;
-        $line->name       = $input['name'];
-        $line->user_id    = $input['user_id'];
-        $line->phone      = $input['phone'];
+        $line                   = new Line;
+        $line->enterprise_id    = $input['enterprise_id'];
+        $line->user_id          = $input['user_id'];
+        $line->name             = $input['name'];
+        $line->phone            = $input['phone'];
         $line->save();
         return $line;
     }

@@ -189,6 +189,12 @@ return [
                 'if_confirmed_off' => '(Si la confirmación esta desactivada)',
                 'restore_enterprise_confirm' => 'Restaurar esta Empresa a su estado original?',
             ],
+
+            'lines' => [
+                'delete_line_confirm' => 'Estas seguro de querer eliminar esta Linea de forma permanente? Esto puede producir un error grave en aquellas partes de la aplicacion que hagan referencia al mismo. Proceda con cautela. Esta operación no puede ser revertida.',
+                'if_confirmed_off' => '(Si la confirmación esta desactivada)',
+                'restore_line_confirm' => 'Restaurar esta Linea a su estado original?',
+            ],
         ],
 
         'dashboard' => [

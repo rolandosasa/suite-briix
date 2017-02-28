@@ -29,6 +29,9 @@ Route::group([
 			/**
 			 * Misc
 			 */
+		
+			Route::post('user/client', ['as'=>'select-user','uses'=>'UserController@selectUser']);
+
 			Route::get('account/confirm/resend/{user}', 'UserController@resendConfirmationEmail')->name('cmovil.account.confirm.resend');
 
 			/**
@@ -108,12 +111,14 @@ Route::group([
 			/**
 			 * Line Status'
 			 */
+
+
 			Route::get('line/deleted', 'LineController@deleted')->name('cmovil.access.line.deleted');
 
 			/**
              * Deleted Line
              */
-            Route::group(['prefix' => 'line/{deletedLine}'], function() {
+            Route::group(['prefix' => 'line/{line}'], function() {
 				Route::get('delete', 'LineController@delete')->name('cmovil.access.line.delete-permanently');
                 Route::get('restore', 'LineController@restore')->name('cmovil.access.line.restore');
             });

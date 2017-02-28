@@ -139,6 +139,15 @@ return [
                 'update_error' => 'Hubo un problema al modificar el Usuario. Intentelo de nuevo.',
                 'update_password_error' => 'Hubo un problema al cambiar la contraseña. Intentelo de nuevo.',
             ],
+
+
+            'lines' => [
+                'already_exists' => 'Esta linea ya existe.',
+                'create_error' => 'Hubo un problema al crear la linea. Intentelo de nuevo.',
+                'delete_error' => 'Hubo un problema al eliminar la linea. Intentelo de nuevo.',
+                'not_found' => 'La linea requerida no existe.',
+                'update_error' => 'Hubo un problema al modificar la linea. Intentelo de nuevo.',
+            ],
         ],
     ],
     

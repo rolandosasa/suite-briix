@@ -12,6 +12,8 @@ use App\Http\Requests\Cmovil\Access\Line\StoreLineRequest;
 use App\Http\Requests\Cmovil\Access\Line\ManageLineRequest;
 use App\Http\Requests\Cmovil\Access\Line\UpdateLineRequest;
 use App\Repositories\Cmovil\Access\Line\LineRepositoryContract;
+use App\Repositories\Cmovil\Access\Role\RoleRepositoryContract;
+use App\Repositories\Cmovil\Access\User\UserRepositoryContract;
 use App\Repositories\Cmovil\Access\Permission\PermissionRepositoryContract;
 
 /**
@@ -25,19 +27,29 @@ class LineController extends Controller
      */
     protected $lines;
 
+
     /**
      * @var PermissionRepositoryContract
      */
     protected $permissions;
 
+
+    /**
+     * @var PermissionRepositoryContract
+     */
+   // protected $roles;
+    protected $user;
+
     /**
      * @param EnterpriseRepositoryContract $enterprises
      * @param PermissionRepositoryContract $permissions
      */
-    public function __construct(LineRepositoryContract $lines, PermissionRepositoryContract $permissions)
+    public function __construct(LineRepositoryContract $lines, PermissionRepositoryContract $permissions, UserRepositoryContract $users)
 	{
         $this->lines = $lines;
         $this->permissions = $permissions;
+        //$this->roles = $roles;
+        $this->users = $users;
     }
 
 	/**
@@ -68,9 +80,21 @@ class LineController extends Controller
      */
     public function create(ManageLineRequest $request)
     {
+            //return view('cmovil.access.lines.create')
+            //->withPermissions($this->permissions->getAllPermissions())
+			//->withLineCount($this->lines->getCount());
+        //$enterprises = Enterprise::list('rfc', 'id');
+        $enterprises = Enterprise::pluck("name","id")->all();
+        $executives = User::pluck('name', 'id')->all();
+      // dd($executives);
+        //return view('cmovil.access.lines.create', compact('enterprises'))
+         //   ->withRoles($this->roles->getAllRoles('sort', 'asc', true));
+
         return view('cmovil.access.lines.create')
-            ->withPermissions($this->permissions->getAllPermissions())
-			->withLineCount($this->lines->getCount());
+            ->withEnterprises($enterprises)
+            ->withExecutives($executives ,'sort', 'asc', true);
+           
+          
     }
 
     /**

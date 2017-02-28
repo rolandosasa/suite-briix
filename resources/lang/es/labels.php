@@ -399,7 +399,7 @@ return [
                     'last_updated' => 'Última modificación',
                     'no_deactivated' => 'Ningún Usuario desactivado disponible',
                     'no_deleted' => 'Ningún Usuario eliminado disponible',
-                    'total' => 'Todas las Empresas',
+                    'total' => 'Todas las Lineas',
                 ],
             ],
         ],

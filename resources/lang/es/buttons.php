@@ -24,6 +24,13 @@ return [
                 'resend_email' => 'Re-enviar E-mail de confirmación',
                 'restore_user' => 'Restaurar Usuario',
             ],
+
+
+            'lines' => [
+                'restore_line' => 'Restaurar Linea',
+                'delete_permanently' => 'Eliminar Linea de forma permanente',
+                
+            ],
         ],
     ],
 

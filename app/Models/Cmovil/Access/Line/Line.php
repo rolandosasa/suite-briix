@@ -29,7 +29,7 @@ class Line extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'user_id', 'phone'];
+    protected $fillable = [ 'enterprise_id', 'user_id','name', 'phone'];
 
     /**
      * @var array

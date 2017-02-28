@@ -84,21 +84,6 @@ class UserController extends Controller
             ->make(true);
     }
 
-    public function selectClient(ManageUserRequest $request)
-    {
-
-        if($request->ajax()){
-
-           $clients = User::where('enterprise_id',$request->enterprise_id)->pluck("name","id")->all();
-           // $enterprises = Enterprise::lists('name', 'id')->where('enterprise_id', $request->enterprise_id);
-
-            $data = view('cmovil.access.contracts.forms.client',compact('clients'))->render();
-            //dd($data);
-            return response()->json(['options'=>$data]);
-
-        }
-
-    }
 
 	/**
      * @param ManageUserRequest $request
@@ -109,7 +94,7 @@ class UserController extends Controller
         $enterprises = Enterprise::lists('rfc', 'id');
         return view('cmovil.access.create', compact('enterprises'))
             ->withRoles($this->roles->getAllRoles('sort', 'asc', true));
-    }
+    }¡
 
 	/**
      * @param StoreUserRequest $request
@@ -263,5 +248,22 @@ class UserController extends Controller
 	 */
 	public function logoutAs() {
         return $this->users->logoutAs();
+    }
+
+    public function selectUser(ManageUserRequest $request)
+    {
+        dd($request);
+
+        if($request->ajax()){
+
+           $clients = User::where('enterprise_id',$request->enterprise_id)->pluck("name","id")->all();
+           // $enterprises = Enterprise::lists('name', 'id')->where('enterprise_id', $request->enterprise_id);
+
+            $data = view('cmovil.access.lines.forms.user',compact('clients'))->render();
+            dd($data);
+            return response()->json(['options'=>$data]);
+
+        }
+
     }
 }

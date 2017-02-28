@@ -1,16 +1,28 @@
-				<div class="form-group">
-                    {{ Form::label('name', trans('validation.attributes.cmovil.access.lines.name'), ['class' => 'col-lg-2 control-label']) }}
+				        <div class="form-group">
+                    {{ Form::label('enterprise_id', trans('validation.attributes.cmovil.access.users.enterprise'), ['class' => 'col-lg-2 control-label']) }}
 
-                    <div class="col-lg-10">
-                        {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.cmovil.access.lines.name')]) }}
+                    <div class="col-lg-4">
+                        
+                        {!!Form::select('enterprise_id', $enterprises,null ,['class' => 'form-control','required' => '','autofocus'=>'', 'placeholder' => trans('validation.attributes.cmovil.access.users.enterprise')]);!!}
+                        
                     </div><!--col-lg-10-->
-                </div><!--form control-->
+                </div>
 
                 <div class="form-group">
                     {{ Form::label('user_id', trans('validation.attributes.cmovil.access.lines.user_id'), ['class' => 'col-lg-2 control-label']) }}
 
-                    <div class="col-lg-10">
-                        {{ Form::text('user_id', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.cmovil.access.lines.user_id')]) }}
+                    <div class="col-lg-4">
+                        {{ Form::select('user_id', [''=>trans('validation.attributes.cmovil.access.lines.user_id')],null, ['class' => 'form-control']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+
+   
+              
+                <div class="form-group">
+                    {{ Form::label('name', trans('validation.attributes.cmovil.access.lines.name'), ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-4">
+                        {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('validation.attributes.cmovil.access.lines.name')]) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
@@ -35,29 +47,35 @@
             margin: 10px 5px 0 0;
           }
         </style>
-      <script>
-              function archivo(evt) {
-                  var files = evt.target.files; // FileList object
-             
-                  // Obtenemos la imagen del campo "file".
-                  for (var i = 0, f; f = files[i]; i++) {
-                    //Solo admitimos imágenes.
-                    if (!f.type.match('image.*')) {
-                        continue;
-                    }
-             
-                    var reader = new FileReader();
-             
-                    reader.onload = (function(theFile) {
-                        return function(e) {
-                          // Insertamos la imagen
-                         document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-                        };
-                    })(f);
-             
-                    reader.readAsDataURL(f);
-                  }
-              }
-             
-              document.getElementById('image').addEventListener('change', archivo, false);
-      </script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+     // $('#enterprise_id').change(function(event){
+   $("select[name='enterprise_id']").change(function(){
+       
+      var enterprise_id = $(this).val();
+       alert(enterprise_id);
+      var token = $("input[name='_token']").val();
+      //alert(token);
+      $.ajax({
+
+          url: "<?php echo route('select-user') ?>",
+
+          method: 'POST',
+
+          data: {enterprise_id:enterprise_id, _token:token},
+
+          success: function(data) {
+           alert("Aqui voy"); 
+            $("select[name='user_id'").html('');
+
+            $("select[name='user_id'").html(data.options);
+
+          }
+
+      });
+
+    });
+  });
+</script>

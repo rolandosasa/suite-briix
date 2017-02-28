@@ -118,7 +118,7 @@
 $(document).ready(function(){
    // $('#enterprise_id').change(function(event){
   $("select[name='enterprise_id']").change(function(){
-//alert("Hello! I am an alert box!!");    
+alert("Hello! I am an alert box!!");    
       var enterprise_id = $(this).val();
 
       var token = $("input[name='_token']").val();
@@ -132,7 +132,7 @@ $(document).ready(function(){
           data: {enterprise_id:enterprise_id, _token:token},
 
           success: function(data) {
-//            alert("Hello! I am an alert box!!"); 
+           alert("Hello! I am an alert box!!"); 
             $("select[name='client_id'").html('');
 
             $("select[name='client_id'").html(data.options);
