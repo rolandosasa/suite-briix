@@ -72,6 +72,9 @@ class LineController extends Controller
                 return $line->action_buttons;
             })
 			->make(true);
+
+
+        
 	}
 
     /**

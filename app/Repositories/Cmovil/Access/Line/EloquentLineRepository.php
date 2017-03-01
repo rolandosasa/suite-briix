@@ -42,8 +42,21 @@ class EloquentLineRepository implements LineRepositoryContract
                 ->get();
         }
 
-        return Line::select(['id', 'enterprise_id', 'user_id', 'name', 'phone', 'created_at', 'updated_at', 'deleted_at'])
-            ->get();
+
+        return Line::select([
+            'lines.id', 
+            \DB::raw('users.name as user'),
+            'lines.user_id',
+            'lines.enterprise_id',
+            'lines.name',
+            'lines.phone',
+            \DB::raw('enterprises.name as enterprise'),
+            'lines.created_at', 
+            'lines.updated_at', 
+            'lines.deleted_at'])
+        ->join('users','users.id','=','lines.user_id')
+        ->join('enterprises','enterprises.id','=','lines.enterprise_id')
+        ->get();
     }
 
 

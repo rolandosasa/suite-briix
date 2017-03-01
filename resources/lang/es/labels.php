@@ -391,6 +391,7 @@ return [
 
                 'table' => [
                     'name' => 'Linea',
+                    'enterprise' => 'Empresa',
                     'phone' => 'Telefono',
                     'user' => 'Usuario',
                     'confirmed' => 'Confirmado',
